@@ -1,6 +1,16 @@
 # Spring Boot Demo Application
 
-This is a simple Spring Boot application created with Maven and Java 17.
+This is a Spring Boot application created with Maven and Java 17, featuring a layered architecture with service layer, DTOs, domain objects, and MapStruct for object mapping.
+
+## Architecture
+
+The application follows a clean layered architecture:
+
+- **Controller Layer**: Handles HTTP requests and responses
+- **Service Layer**: Contains business logic
+- **Domain Layer**: Contains domain models
+- **DTO Layer**: Data Transfer Objects for API communication
+- **Mapper Layer**: MapStruct for object mapping between layers
 
 ## Prerequisites
 
@@ -17,8 +27,22 @@ src/
 │   │       └── example/
 │   │           └── demo/
 │   │               ├── DemoApplication.java
-│   │               └── controller/
-│   │                   └── HelloController.java
+│   │               ├── config/
+│   │               │   └── OpenApiConfig.java
+│   │               ├── controller/
+│   │               │   └── HelloController.java
+│   │               ├── domain/
+│   │               │   ├── GreetingRequest.java
+│   │               │   └── GreetingResponse.java
+│   │               ├── dto/
+│   │               │   ├── HelloRequestDto.java
+│   │               │   └── HelloResponseDto.java
+│   │               ├── mapper/
+│   │               │   └── HelloMapper.java
+│   │               └── service/
+│   │                   ├── GreetingService.java
+│   │                   └── impl/
+│   │                       └── GreetingServiceImpl.java
 │   └── resources/
 │       └── application.properties
 └── test/
@@ -57,14 +81,62 @@ You can also run the `DemoApplication.java` class directly from your IDE.
 
 Once the application is running, you can test it using:
 
-1. **Home page:** http://localhost:8080/
-2. **Hello endpoint:** http://localhost:8080/hello
-3. **Hello with parameter:** http://localhost:8080/hello?name=YourName
+### GET Endpoint
+- **Basic:** http://localhost:8080/hello
+- **With parameters:** http://localhost:8080/hello?name=John&language=es&timeOfDay=morning
+
+### POST Endpoint
+```bash
+curl -X POST http://localhost:8080/hello \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "John",
+    "language": "es",
+    "timeOfDay": "morning"
+  }'
+```
+
+### Home Page
+- http://localhost:8080/
+
+## API Documentation (Swagger)
+
+The application includes automatic API documentation using Swagger/OpenAPI 3:
+
+- **Swagger UI:** http://localhost:8080/swagger-ui.html
+- **OpenAPI JSON:** http://localhost:8080/api-docs
 
 ## Available Endpoints
 
 - `GET /` - Welcome message
-- `GET /hello` - Hello message with optional name parameter
+- `GET /hello` - Hello message with query parameters (name, language, timeOfDay)
+- `POST /hello` - Hello message with JSON request body
+
+## Supported Languages and Times
+
+The service supports multiple languages and times of day:
+
+### Languages
+- `en` - English
+- `es` - Spanish  
+- `fr` - French
+
+### Times of Day
+- `morning` - Morning greetings
+- `afternoon` - Afternoon greetings
+- `evening` - Evening greetings
+- `night` - Night greetings
+- `day` - General day greeting (default)
+
+## Technologies Used
+
+- **Spring Boot 3.2.0** - Application framework
+- **Java 17** - Programming language
+- **Maven** - Build tool
+- **MapStruct** - Object mapping
+- **Lombok** - Reducing boilerplate code
+- **SpringDoc OpenAPI** - API documentation
+- **Swagger UI** - Interactive API documentation
 
 ## Running Tests
 
