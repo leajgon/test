@@ -14,11 +14,13 @@ import lombok.NoArgsConstructor;
 public class HelloRequestDto {
     
     @Schema(description = "Name to greet", example = "John", defaultValue = "World")
-    private String name;
+    private String nombre;
     
     @Schema(description = "Language for greeting", example = "en", defaultValue = "en")
-    private String language;
+    private Integer language;
     
     @Schema(description = "Time of day", example = "morning", defaultValue = "day")
     private String timeOfDay;
+
+    private String unusedField;
 } 
