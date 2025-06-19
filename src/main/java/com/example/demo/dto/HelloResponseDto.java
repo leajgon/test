@@ -22,5 +22,7 @@ public class HelloResponseDto {
     private String name;
     
     @Schema(description = "Timestamp of the greeting", example = "2024-01-15T10:30:00")
-    private LocalDateTime timestamp;
+    private String timestamp;
+
+    private Boolean success = false;
 } 
