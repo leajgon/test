@@ -11,7 +11,7 @@ import org.mapstruct.Named;
 @Mapper(componentModel = "spring")
 public interface HelloMapper {
 
-    @Mapping(target = "name", source = "name")
+    @Mapping(target = "name", source = "nombre")
     @Mapping(target = "language", source = "language")
     @Mapping(target = "timeOfDay", source = "timeOfDay")
     GreetingRequest toGreetingRequest(HelloRequestDto dto);
@@ -27,8 +27,8 @@ public interface HelloMapper {
     }
 
     @Named("defaultLanguage")
-    default String defaultLanguage(String language) {
-        return language != null && !language.trim().isEmpty() ? language : "en";
+    default String defaultLanguage(Integer language) {
+        return language != null ? language.toString() : "en";
     }
 
     @Named("defaultTimeOfDay")
